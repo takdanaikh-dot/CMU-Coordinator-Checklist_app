@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCU REFERRAL DATABASE v15.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
+        body { font-family: 'Sarabun', sans-serif; background-color: #f1f5f9; padding-bottom: 120px; }
+        .ts-badge { font-family: monospace; font-size: 11px; color: white; background: #1e293b; padding: 2px 6px; border-radius: 4px; font-weight: bold; white-space: nowrap; }
+        .section-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 1rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .row-item { display: flex; flex-direction: column; padding: 12px 16px; border-bottom: 1px solid #f1f5f9; gap: 8px; }
+        .row-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+        input[type="checkbox"] { width: 24px; height: 24px; cursor: pointer; flex-shrink: 0; }
+        .remark-input { width: 100%; font-size: 13px; padding: 6px 10px; border: 1px dashed #cbd5e1; border-radius: 6px; outline: none; background: #f8fafc; }
+        .remark-input:focus { border-color: #ef4444; background: white; }
+    </style>
+</head>
+<body>
+
+    <header class="sticky top-0 z-50 bg-slate-900 text-white p-4 border-b-4 border-red-600 shadow-xl">
+        <div class="max-w-2xl mx-auto space-y-3">
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl font-bold italic tracking-wider">CCU REFERRAL SYSTEM</h1>
+                <div id="live-clock" class="text-xl font-mono text-red-400 font-bold">00:00:00</div>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+                <input type="text" id="p_name" placeholder="ชื่อ-นามสกุล" class="p-2 rounded text-slate-900 font-bold outline-none border-2 border-slate-300">
+                <input type="text" id="p_hn" placeholder="HN: xxxxxxxx" class="p-2 rounded text-slate-900 font-bold outline-none border-2 border-slate-300">
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-2xl mx-auto p-4">
+
+        <div class="bg-red-600 p-4 rounded-xl shadow-lg mb-6 text-white flex gap-2">
+            <input type="text" id="search-input" placeholder="ค้นหาด้วย ชื่อ หรือ HN..." class="flex-1 p-3 rounded-lg text-slate-900 font-bold outline-none border-none">
+            <button onclick="searchData()" class="bg-slate-900 px-6 rounded-lg font-bold hover:bg-black transition-all"><i class="fas fa-search"></i> ค้นหา</button>
+        </div>
+
+        <div class="section-card">
+            <div class="bg-slate-800 text-white p-3 font-bold text-sm">1. การติดต่อประสานที่จะส่งผู้ป่วยไปยังโรงพยาบาลจุฬาลงกรณ์ สภากาชาดไทย </div>
+            <div class="row-item">
+                <div class="row-top">
+                    <label class="flex gap-3"><input type="checkbox" class="step-cb"> <span>1.1 ทีมอายุรแพทย์โรคหัวใจ โรงพยาบาลมหาราชนครเชียงใหม่ 
+ปรึกษาทีมรักษา โรงพยาบาลจุฬาลงกรณ์ โดยการประสานข้อมูลผ่านทางโทรศัพท์ หรือLINE consult </span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="หมายเหตุ...">
+            </div>
+            <div class="row-item">
+                <div class="row-top">
+                    <label class="flex gap-3 font-bold text-red-700"><input type="checkbox" class="step-cb"> <span>1.2 ทีมหอผู้ป่วยติดต่อประสานงานแจ้งเรื่องอาการผู้ป่วยการ
+รักษาที่ได้รับในปัจจุบัน การประเมินด้านจิตสังคม ปัญหาทางการพยาบาล ปัญหาทางด้านจิตสังคม สิทธิการรักษา การดูแลต่อเนื่องที่ต้องได้รับกับหอผู้ป่วย CCU ตึกภูมิสิริ ชั้น 4 โรงพยาบาลจุฬาลงกรณ์ </span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="หมายเหตุ...">
+            </div>
+            <div class="row-item">
+                <div class="row-top">
+                    <label class="flex gap-3"><input type="checkbox" class="step-cb"> <span>1.3 เมื่อแพทย์โรงพยาบาลจุฬาลงกรณ์รับทราบและคอนเฟิร์ม รับ+มีเตียง และจุฬาฯประสานรับเคส ให้แจ้งแพทย์เจ้าของไข้และอาจารย์ตามลำดับ ทั้งนี้แพทย์จะประสานส่งข้อมูลเกี่ยวกับข้อมูลผู้ป่วยทั้งหมด พร้อมทั้งแผนการรักษาต่อเนื่องอีกครั้ง </span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="หมายเหตุ...">
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="bg-slate-700 text-white p-3 font-bold text-sm">2. การประสานเรื่องยานพาหนะและการขออนุมัติ การส่งผู้ป่วย</div>
+            <div class="row-item">
+                <div class="row-top">
+                    <label class="flex gap-3"><input type="checkbox" class="step-cb"> <span>2.1 หอผู้ป่วยแจ้งประสาน Referral Center และหน่วย
+ยานพาหนะ</span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="หมายเหตุ...">
+            </div>
+            <div class="row-item">
+                <div class="row-top">
+                    <label class="flex gap-3 font-bold text-blue-700"><input type="checkbox" class="step-cb"> <span>2.2 หอผู้ป่วยเคลียร์ค่าใช้จ่ายและเตรียมเอกสารผู้ป่วยให้พร้อม
+สำหรับการออกเดินทาง  </span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="หมายเหตุ...">
+            </div>
+            <div class="row-item">
+                <div class="row-top">
+                    <label class="flex gap-3"><input type="checkbox" class="step-cb"> <span>2.3 หอผู้ป่วยประสานผู้บังคับบัญชา ตามลำดับ เพื่อทำหนังสือขอ
+ความอนุเคราะห์ จัดรถพยาบาลและบุคลากรในการนำส่งผู้ป่วยไปโรงพยาบาลจุฬาลงกรณ์ สภากาชาดไทย (ส่งผ่าน งานการพยาบาลผู้ป่วยอายุรศาสตร์ ไปยังฝ่ายการพยาบาล สำนักงานผู้อำนวยการ และ สำนักงานคณบดี)  
+โดยหอผู้ป่วยทำเรื่องขออนุมัติใช้รถพยาบาล ออนไลน์ ประสานหน่วยยานพาหนะ เรื่องเวลาในการเดินทาง และประสาน referral Center อีกครั้งหลัง เรื่องขออนุมัติทั้งหมดเรียบร้อยแล้วเพื่อกำหนดเวลาเดินทางร่วมกัน </span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="หมายเหตุ...">
+            </div>
+            <div class="row-item">
+                <div class="row-top">
+                    <label class="flex gap-3"><input type="checkbox" class="step-cb"> <span>2.4 หอผู้ป่วยประสาน referral Center เรื่องการนัดหมายออก
+เดินทาง (กำหนดการรถออก 08.00น. ผู้ประสานงานแจ้งโรงรถรับทราบ ให้ Stand By รถบริเวณหน้า ER 07.30น. แจ้ง referral Center รับทราบ) </span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="หมายเหตุ...">
+            </div>
+        </div>
+
+        <div class="section-card border-l-8 border-red-600">
+            <div class="bg-red-800 text-white p-3 font-bold text-sm">3. การเตรียมผู้ป่วยและญาติ </div>
+            <div class="row-item bg-red-50/30">
+                <div class="row-top">
+                    <label class="flex gap-3 font-bold text-red-900"><input type="checkbox" class="step-cb"> <span>3.1 ทีมแพทย์คุยกับผู้ป่วยและญาติเกี่ยวกับความเสี่ยงที่อาจจะ
+เกิดขึ้นได้ ในระหว่างการเดินทาง ผู้ป่วยและญาติรับทราบ+เซ็นต์ใบยินยอมเรียบร้อย โดยนำฉบับ Copy ให้ญาติติดตัวไปด้วย </span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="หมายเหตุ...">
+            </div>
+            <div class="row-item bg-red-50/30">
+                <div class="row-top">
+                    <label class="flex gap-3 font-bold text-red-900"><input type="checkbox" class="step-cb"> <span>3.2 ประสานเรื่องการเดินทางร่วมกันของญาติไปกับรถ
+Ambulance ให้ญาติผู้ป่วยแจ้งเรื่องการเตรียมอาหาร/ขนม/น้ำดื่ม ให้พร้อมสำหรับการเดินทาง </span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="หมายเหตุ...">
+            </div>
+            <div class="row-item">
+                <div class="row-top">
+                    <label class="flex gap-3"><input type="checkbox" class="step-cb"> <span>3.3 ทีมแพทย์ผู้รักษา และทีมพยาบาลประสานงาน พยาบาล CCU 
+และพยาบาล EMS ประชุมวางแผนร่วมกันเกี่ยวกับการเตรียมอุปกรณ์ การวางแผนเมื่อเกิดกรณีฉุกเฉินบนรถ แพทย์อธิบายและทำความเข้าใจกับพยาบาล EMSและพยาบาลCCU เกี่ยวกับการติดตามอาการอย่างต่อเนื่องที่ต้องเฝ้าระวัง เช่น 
+PVC’s, VT or serious arrhythmia, การเตรียม CPR ใส่ Tube เป็นต้น</span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="หมายเหตุ...">
+            </div>
+            <div class="row-item">
+                <div class="row-top">
+                    <label class="flex gap-3"><input type="checkbox" class="step-cb"> <span>3.4 ทีม EMS มีแพทย์ Stand By เพื่อรับการ Consult ในช่วงที่ Refer สำหรับเคสนี้โดยตรง หากมีเหตุฉุกเฉินสามารถโทร หรือ VDO call และสามารถติดต่ออายุรแพทย์โรคหัวใจตามเบอร์โทรที่ให้ไว้ (ตามเอกสารแนบ)</span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="หมายเหตุ...">
+            </div>
+        </div>
+
+        <div class="section-card border-l-8 border-green-600 bg-green-50/30">
+            <div class="bg-green-800 text-white p-3 font-bold text-sm">4. ขั้นตอนการเดินทาง </div>
+            <div class="row-item">
+                <div class="row-top">
+                    <label class="flex gap-3 font-bold text-green-900"><input type="checkbox" class="step-cb"> <span>4.1 เช้าวันเดินทาง  หอผู้ป่วยประสาน Referral Center และขอเปล Wheel-B รับผู้ป่วยจากหอผู้ป่วยเพื่อลงไปยังรถRefer แจ้งผู้บังคับบัญชาตามขั้นตอนเมื่อมีการออกเดินทาง พร้อมทั้งแจ้งเวลาออกเดินทางให้ผู้ประสานงาน พยาบาลประสานงานปลูกถ่ายหัวใจ รับทราบ หรือแจ้งทางไลน์ เพื่อแจ้งข้อมูล
+เวลาออกเดินทางให้ผู้ประสานงานโรงพยาบาลจุฬาลงกรณ์รับทราบ และ CMU Referral center แจ้ง Chula Referral Center </span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="ระบุเหตุการณ์/สภาวะผู้ป่วย...">
+            </div>
+            <div class="row-item">
+                <div class="row-top">
+                    <label class="flex gap-3 font-bold text-green-900"><input type="checkbox" class="step-cb"> <span>4.2 พยาบาล CCU โทรส่งข้อมูลคนไข้ที่หอผู้ป่วยที่ได้รับแจ้งว่าจะ
+ย้ายไป CCU รพ.จุฬาฯ โทร. 02-2564000 ต่อ 80415 ก่อนออกเดินทาง </span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="ระบุเหตุการณ์/สภาวะผู้ป่วย...">
+            </div>
+            <div class="row-item">
+                <div class="row-top">
+                    <label class="flex gap-3 font-bold text-green-900"><input type="checkbox" class="step-cb"> <span>4.3 หากใกล้ถึงโรงพยาบาลปลายทาง (Check point ดอนเมือง)  
+ให้แจ้งผู้ประสานงาน นางมัญชรี ขัตติยะ โทร.081-7066427 หรือไลน์แจ้ง เพื่อแจ้ง CCU รพ.จุฬาฯรับทราบ พร้อมทั้งรายงานแพทย์ให้ทราบตามลำดับ</span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="ระบุเหตุการณ์/สภาวะผู้ป่วย...">
+            </div>
+            <div class="row-item border-none">
+                <div class="row-top">
+                    <label class="flex gap-3 font-bold text-green-900"><input type="checkbox" class="step-cb"> <span>4.4 เมื่อถึงที่โรงพยาบาลจุฬาลงกรณ์ ให้จอดรถใต้ตึกภูมิสิริ และ 
+Transfer ผู้ป่วยไปที่ CCU ชั้น 4 ตึกภูมิสิริ โรงพยาบาลจุฬาลงกรณ์ พร้อมทั้งแจ้งผู้ประสานงาน นางมัญชรี ขัตติยะ พยาบาลประสานงานปลูกถ่ายหัวใจรับทราบ เพื่อแจ้งผู้บังคับบัญชาเป็นลำดับต่อไป แจ้งญาตินำบัตรประชาชนของผู้ป่วยไปติดต่อลงทะเบียนที่ชั้น1(ในกรณีที่ไม่มีญาติไปด้วยพยาบาลReferรับผิดชอบในการลงทะเบียนการเป็นผู้ป่วยใหม่) และติดต่อหอผู้ป่วย CCU รพ.จุฬาฯ โทร. 02-2564000 ต่อ 80415 </span></label>
+                    <div class="ts-area"></div>
+                </div>
+                <input type="text" class="remark-input" placeholder="ระบุสภาวะเมื่อส่งมอบ...">
+            </div>
+        </div>
+
+    </main>
+
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t-2 shadow-2xl flex gap-3 z-50">
+        <button onclick="saveToDB()" class="flex-1 bg-red-700 hover:bg-red-800 text-white py-4 rounded-xl font-bold text-lg active:scale-95 transition-all">
+            <i class="fas fa-save mr-2"></i> บันทึกข้อมูล (SAVE)
+        </button>
+        <button onclick="window.location.reload()" class="px-6 bg-slate-200 text-slate-600 rounded-xl font-bold">RESET</button>
+    </div>
+
+    <script>
+        setInterval(() => {
+            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('th-TH', { hour12: false });
+        }, 1000);
+
+        document.querySelectorAll('.step-cb').forEach(cb => {
+            cb.onchange = function() {
+                const area = this.closest('.row-item').querySelector('.ts-area');
+                if (this.checked) {
+                    const now = new Date();
+                    const d = now.toLocaleDateString('th-TH', {day:'2-digit', month:'2-digit', year:'2-digit'});
+                    const t = now.toLocaleTimeString('th-TH', {hour12: false, hour:'2-digit', minute:'2-digit'});
+                    area.innerHTML = `<span class="ts-badge">${d} ${t}</span>`;
+                } else { area.innerHTML = ""; }
+            }
+        });
+
+        function saveToDB() {
+            const hn = document.getElementById('p_hn').value.trim();
+            const name = document.getElementById('p_name').value.trim();
+            if (!hn || !name) { alert("🚨 ระบุชื่อและ HN ก่อนบันทึก!"); return; }
+
+            const items = Array.from(document.querySelectorAll('.row-item')).map(row => ({
+                checked: row.querySelector('.step-cb').checked,
+                timestamp: row.querySelector('.ts-area').innerHTML,
+                remark: row.querySelector('.remark-input').value
+            }));
+
+            const record = { name, hn, items, savedAt: new Date().toLocaleString('th-TH') };
+            localStorage.setItem('ccu_full_' + hn, JSON.stringify(record));
+            localStorage.setItem('ccu_full_name_' + name, hn);
+            alert("✅ บันทึกข้อมูลและหมายเหตุเรียบร้อย!");
+        }
+
+        function searchData() {
+            const query = document.getElementById('search-input').value.trim();
+            let hn = query;
+            const foundHN = localStorage.getItem('ccu_full_name_' + query);
+            if (foundHN) hn = foundHN;
+
+            const dataStr = localStorage.getItem('ccu_full_' + hn);
+            if (dataStr) {
+                const data = JSON.parse(dataStr);
+                document.getElementById('p_name').value = data.name;
+                document.getElementById('p_hn').value = data.hn;
+                
+                const rows = document.querySelectorAll('.row-item');
+                data.items.forEach((item, i) => {
+                    const row = rows[i];
+                    row.querySelector('.step-cb').checked = item.checked;
+                    row.querySelector('.ts-area').innerHTML = item.timestamp;
+                    row.querySelector('.remark-input').value = item.remark || "";
+                });
+                alert("📂 ดึงข้อมูลสำเร็จ! บันทึกเมื่อ: " + data.savedAt);
+            } else { alert("❌ ไม่พบข้อมูล"); }
+        }
+    </script>
+</body>
+</html>
